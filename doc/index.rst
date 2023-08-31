@@ -17,3 +17,4 @@ Welcome to Physics Code´s documentation!
    feature-a.md
    feature-b.md
    feature-c.md
+   feature-d.md
