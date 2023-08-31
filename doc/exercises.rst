@@ -32,3 +32,8 @@ Next Step!
 - Try to solve the same programms with different numerical methods!
 - Try to solve evrything you can analytically because solving these equations by hand can help the process of learning the physics you´re programming. It´s way easer programm physics than understand them, so go slow and try to understand the things you´re solving :) 
 - Make a GitHub repository with your codes and share them!
+
+
+.. math::
+
+   \frac{ \sum_{t=0}^{N}f(t,k) }{N}
