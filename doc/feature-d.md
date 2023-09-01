@@ -41,4 +41,57 @@ T = mgcos(\theta)
 
 And these would be the equations that we must solve numerically.
 
+In this paper, the pendulum equation will be solved in four cases:
+
+1. Simple pendulum with Euler's method (this is  for {math}`\theta \leq 15°`)
+2. Simple pendulum with the Euler-Cromer method (that is, for {math}`\theta \leq 15°`)
+3. Friction Pendulum (for large {math}`\theta` values)
+
+
+### **Simple Pendulum with Euler**
+
+For this case:
+
+```{math}
+\frac {d^2\theta}{dt^2} = \frac {-g}{l} \theta
+```
+
+Numerically:
+
+```{math}
+\omega_{i+1} = \omega_{i} - Δt(\frac {g}{l} \theta_{i})
+```
+
+```{theta}
+\theta_{i+1} = \theta_{i} + \omega_{i} Δt 
+```
+
+This is:
+
+```
+#Import Libraries
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+```
+g = 9.8; theta = [0.1]; w = [0]; l = 1
+time = np.linspace(0, 10, 200)
+
+for i in range(len(time)-1):
+  w.append(w[i] - g/l * theta[i] * time[1])
+  theta.append(theta[i] + w[i] * time[1])
+
+plt.plot(time, theta)
+plt.grid("--")
+plt.title("Pendulum With No Drag Euler Method")
+plt.xlabel("time")
+plt.ylabel("theta")
+```
+
+
+
+
+
+
 
