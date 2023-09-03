@@ -89,7 +89,30 @@ plt.xlabel("time")
 plt.ylabel("theta")
 ```
 
+### **Simple Pendulum with Euler-Cromer**
 
+We have the same case above but numerically it is as follows:
+
+```{math}
+\omega_{i+1} = \omega_{i} - Δt(\frac {g}{l} \theta)
+
+\theta_{i+1} = \theta_{i} + Δt (\omega_{i+1})
+```
+The code is:
+
+```
+g = 9.8; thetacromer = [0.2]; wcromer = [0]; l = 1
+
+for i in range(len(time)-1):
+  wcromer.append(wcromer[i] - g/l * thetacromer[i] * time[1])
+  thetacromer.append(thetacromer[i] + time[1]*(wcromer[i+1]))
+
+plt.plot(time, thetacromer, color="orange")
+plt.grid("--")
+plt.title("Pendulum With No Drag Euler-Cromer")
+plt.xlabel("time")
+plt.ylabel("theta")
+```
 
 
 
