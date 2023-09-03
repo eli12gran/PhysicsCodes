@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pendulum With Drag &mdash; PhysicsCodes 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Parabolic Motion with Drag" href="feature-c.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PhysicsCodes
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="purpose.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credit.html">Credit and inspiration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Summary (Codes and documentation)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature-a.html"><strong>Radioactive Decay</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature-b.html"><strong>Free Fall with Friction</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature-c.html"><strong>Parabolic Motion with Drag</strong></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Pendulum With Drag</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#simple-pendulum-with-euler"><strong>Simple Pendulum with Euler</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simple-pendulum-with-euler-cromer"><strong>Simple Pendulum with Euler-Cromer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pendulum-with-friction"><strong>Pendulum with friction</strong></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PhysicsCodes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><strong>Pendulum With Drag</strong></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/feature-d.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pendulum-with-drag">
+<h1><strong>Pendulum With Drag</strong><a class="headerlink" href="#pendulum-with-drag" title="Link to this heading"></a></h1>
+<p>In a simple pendulum we have a periodic movement, that is, a movement that goes and returns. If we drew the force diagram of the movement, we would have something like this:</p>
+<p><img alt="" src="_images/pendulum1.jpg" /></p>
+<p>When we talk about a simple pendulum, we mean that the angle <span class="math notranslate nohighlight">\(\theta\)</span> is never greater than <span class="math notranslate nohighlight">\(sin(15°)\)</span>, so this implies that <span class="math notranslate nohighlight">\(sin(\theta) ≈ \theta\)</span> so we do not have a chaotic movement, as we will see a case later. If we wrote Newton’s equations for this movement we would have:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\sum F_{x} = -Tsen(\theta) = m \frac {d^2x}{dt^2}\\\sum F_{y} = Tcos(\theta) - mg = m \frac {d^2y}{dt^2}\end{aligned}\end{align} \]</div>
+<p>As we see here, we have two equations to solve a system with three unknowns. This system becomes very ineffective and complex to solve, so the easiest solution is to <strong>translate the system to polar coordinates</strong>. To take a good look at how the movement would be described in polar coordinates, let’s look at the following image:</p>
+<p><img alt="" src="_images/pendulum2.jpg" /></p>
+<p>If we were to write Newton’s equations for this “new system”, we would have:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\sum F_{r} = T - mgcos(\theta) = m\frac {d^2 r}{dt^2}\\\sum F_{\theta} = -mg sin(\theta) = m \frac {dv_{\theta}}{dt}\end{aligned}\end{align} \]</div>
+<p>If we look at the image we can see that <span class="math notranslate nohighlight">\(r\)</span> is the length of the string, so its derivative is a constant so it is <span class="math notranslate nohighlight">\(0\)</span>. In addition, the equation of the sum of forces in <span class="math notranslate nohighlight">\(\theta\)</span> can be described in a different way since the speed in this movement would be given by: <span class="math notranslate nohighlight">\(r \frac {d\theta}{dt}\)</span>
+then the equations are described as follows:</p>
+<hr class="docutils" />
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}T-mgcos(\theta) = 0\\T = mgcos(\theta)\\\frac {d^2\theta}{dt^2} = \frac {-g}{l} sen(\theta)\end{aligned}\end{align} \]</div>
+<hr class="docutils" />
+<p>And these would be the equations that we must solve numerically.</p>
+<p>In this paper, the pendulum equation will be solved in four cases:</p>
+<ol class="arabic simple">
+<li><p>Simple pendulum with Euler’s method (this is  for <span class="math notranslate nohighlight">\(\theta \leq 15°\)</span>)</p></li>
+<li><p>Simple pendulum with the Euler-Cromer method (that is, for <span class="math notranslate nohighlight">\(\theta \leq 15°\)</span>)</p></li>
+<li><p>Friction Pendulum (for large <span class="math notranslate nohighlight">\(\theta\)</span> values)</p></li>
+</ol>
+<section id="simple-pendulum-with-euler">
+<h2><strong>Simple Pendulum with Euler</strong><a class="headerlink" href="#simple-pendulum-with-euler" title="Link to this heading"></a></h2>
+<p>For this case:</p>
+<div class="math notranslate nohighlight">
+\[\frac {d^2\theta}{dt^2} = \frac {-g}{l} \theta\]</div>
+<p>Numerically:</p>
+<div class="math notranslate nohighlight">
+\[\omega_{i+1} = \omega_{i} - Δt(\frac {g}{l} \theta_{i})\]</div>
+<p>This is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Import Libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="mf">9.8</span><span class="p">;</span> <span class="n">theta</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">];</span> <span class="n">w</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+  <span class="n">w</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">g</span><span class="o">/</span><span class="n">l</span> <span class="o">*</span> <span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+  <span class="n">theta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Pendulum With No Drag Euler Method&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;theta&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/pendulo1.jpg" /></p>
+</section>
+<section id="simple-pendulum-with-euler-cromer">
+<h2><strong>Simple Pendulum with Euler-Cromer</strong><a class="headerlink" href="#simple-pendulum-with-euler-cromer" title="Link to this heading"></a></h2>
+<p>We have the same case above but numerically it is as follows:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\omega_{i+1} = \omega_{i} - Δt(\frac {g}{l} \theta)\\\theta_{i+1} = \theta_{i} + Δt (\omega_{i+1})\end{aligned}\end{align} \]</div>
+<p>The code is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="mf">9.8</span><span class="p">;</span> <span class="n">thetacromer</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">];</span> <span class="n">wcromer</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+  <span class="n">wcromer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">wcromer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">g</span><span class="o">/</span><span class="n">l</span> <span class="o">*</span> <span class="n">thetacromer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+  <span class="n">thetacromer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thetacromer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">wcromer</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">thetacromer</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Pendulum With No Drag Euler-Cromer&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;theta&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/pendulo2.jpg" /></p>
+</section>
+<section id="pendulum-with-friction">
+<h2><strong>Pendulum with friction</strong><a class="headerlink" href="#pendulum-with-friction" title="Link to this heading"></a></h2>
+<p>For this case we would have:</p>
+<div class="math notranslate nohighlight">
+\[\frac {d^2\theta}{dt^2} = -\frac {g}{l} sin(\theta)- \frac {b}{m} \frac {d\theta}{dt} \]</div>
+<p>Where <span class="math notranslate nohighlight">\(\frac {b}{m}\)</span> is the coefficient <span class="math notranslate nohighlight">\(\gamma\)</span> used in the previous codes. Since this equation is non-linear, what we will do is “take advantage” of the definition of angular frequency <span class="math notranslate nohighlight">\(\omega\)</span> which is defined as the change of the angle with respect to time. So having it this way we can say that <span class="math notranslate nohighlight">\(\omega = \frac {d\theta}{dt}\)</span>. So our equation would be in terms of <span class="math notranslate nohighlight">\(\omega\)</span> and would look like this:</p>
+<div class="math notranslate nohighlight">
+\[\omega´ = -\frac {g}{l} sin(\theta)- \frac {b}{m} \omega\]</div>
+<p>Now yes, we can use Euler-Cromer again to solve it, and the numerical equations are as follows:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\omega_{i+1} = \omega_{i} + Δt(\frac {-g}{l} sin(\theta_{i}) - \gamma \omega_{i})\\\theta_{i+1} = \omega_{i+1} + Δt(\theta_{i})\end{aligned}\end{align} \]</div>
+<hr class="docutils" />
+<p>Since the idea is to observe several angles in a graph, we will create a function for this. It will receive as parameters a maximum time, a list of angles and the coefficient of viscosity, the latter is which is in the hands of the user to change. The dynamic viscosity of the air is quite low (<span class="math notranslate nohighlight">\(0.018\)</span>), so it is recommended to set a slightly larger number to see how the movement stops.</p>
+<p>The code is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">frictionPendulum</span><span class="p">(</span><span class="n">tiempo</span><span class="p">,</span> <span class="n">angulos</span><span class="p">,</span> <span class="n">dynamic_viscosity</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="mf">9.8</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+  <span class="n">miu</span> <span class="o">=</span> <span class="n">dynamic_viscosity</span><span class="p">;</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">g</span> <span class="o">=</span> <span class="mf">9.8</span><span class="p">;</span> <span class="n">R</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span> <span class="c1">#Constantes</span>
+  <span class="n">b</span> <span class="o">=</span> <span class="mi">6</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">miu</span>
+  <span class="n">gamma</span> <span class="o">=</span> <span class="n">b</span><span class="o">/</span><span class="n">m</span>
+  <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tiempo</span><span class="o">+</span><span class="n">dt</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+  <span class="n">w2</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">for</span> <span class="n">theta_</span> <span class="ow">in</span> <span class="n">angulos</span><span class="p">:</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="p">[</span><span class="n">theta_</span><span class="p">,</span> <span class="n">theta_</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">tiempo</span><span class="o">/</span><span class="n">dt</span><span class="p">)):</span>
+        <span class="n">w2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w2</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="o">/</span><span class="n">l</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">w2</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">theta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">w2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;angulo=</span><span class="si">{</span><span class="n">theta_</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;theta&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Pendulum with Drag Euler Cromer&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+  <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Calling our finction and giving it some angles converted into radians:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">frictionPendulum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="mi">90</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span> <span class="mi">45</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span> <span class="mi">50</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span> <span class="mi">80</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">],</span> <span class="mf">0.097</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/pendulo3.jpg" /></p>
+<hr class="docutils" />
+<p>Now, with the purpose  of comparing the exact and analytical solutions, we solved the differential equation for <strong>small angles</strong> analitically which gave as a result:</p>
+<div class="math notranslate nohighlight">
+\[\theta(t)= \theta_{0} e^{-\gamma t/2} sin(\omega t + \phi)\]</div>
+<p>It is important to let clear that this is a possible solution when:</p>
+<div class="math notranslate nohighlight">
+\[\omega = \sqrt{\frac {\gamma^2}{4} - \frac {g}{l}}\]</div>
+<p>For large angles, the equation cannot be solved analytically since it is no longer linear (<span class="math notranslate nohighlight">\(sin(\theta)\)</span> appears) in the second derivative of <span class="math notranslate nohighlight">\(\theta\)</span>. So, the solution of this analytic remains:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">phi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">theta</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">amp</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">phi</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">g</span> <span class="o">=</span><span class="mf">9.8</span><span class="p">;</span> <span class="n">l</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="nb">abs</span><span class="p">((</span><span class="n">gamma</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">g</span><span class="o">/</span><span class="n">l</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+  <span class="n">theta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">amp</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span><span class="o">*</span><span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">phi</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Exact Solution for Small Theta Values With Drag&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;theta&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p><img alt="" src="_images/pendulo4.jpg" /></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="feature-c.html" class="btn btn-neutral float-left" title="Parabolic Motion with Drag" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Elizabeth Granda.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

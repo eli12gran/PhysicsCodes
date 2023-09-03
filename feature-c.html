@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parabolic Motion with Drag &mdash; PhysicsCodes 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Pendulum With Drag" href="feature-d.html" />
+    <link rel="prev" title="Free Fall with Friction" href="feature-b.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PhysicsCodes
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="purpose.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credit.html">Credit and inspiration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Summary (Codes and documentation)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature-a.html"><strong>Radioactive Decay</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature-b.html"><strong>Free Fall with Friction</strong></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Parabolic Motion with Drag</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature-d.html"><strong>Pendulum With Drag</strong></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PhysicsCodes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><strong>Parabolic Motion with Drag</strong></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/feature-c.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="parabolic-motion-with-drag">
+<h1><strong>Parabolic Motion with Drag</strong><a class="headerlink" href="#parabolic-motion-with-drag" title="Link to this heading"></a></h1>
+<p>In this section, we will revisit the equations we developed in free fall motion. However, to describe this motion, we will slightly change the variable definitions. That is, we will express velocity in terms of the derivative of position, and we will do the same for acceleration (the second derivative of position). This is done in order to utilize a numerical method to approximate both results.</p>
+<p>From the free fall motion, we knew that:</p>
+<p><strong>For <span class="math notranslate nohighlight">\(x\)</span>:</strong></p>
+<div class="math notranslate nohighlight">
+\[\frac {dV_{x}}{dt} = - \gamma V_{x} \tag{1}\]</div>
+<p><strong>For <span class="math notranslate nohighlight">\(y\)</span>:</strong></p>
+<div class="math notranslate nohighlight">
+\[\frac {dV_{y}}{dt} = -g-\gamma V_{y} \tag{2}\]</div>
+<p>From the above equations, we can deduce velocities as:</p>
+<p><strong>For <span class="math notranslate nohighlight">\(x\)</span>:</strong></p>
+<div class="math notranslate nohighlight">
+\[\frac {dx}{dt} = V_{0x} e^{-\gamma t} \tag{3}
+\]</div>
+<p><strong>For <span class="math notranslate nohighlight">\(y\)</span>:</strong></p>
+<div class="math notranslate nohighlight">
+\[\frac {dy}{dt} = - \frac {g}{\gamma}[1-e^{-\gamma t}] + V_{0y}e^{-\gamma t} \tag{4}
+\]</div>
+<hr class="docutils" />
+<p>The numerical method we will use is <strong>Euler-Cromer</strong>, also known as the semi-implicit Euler method. This method generates a discrete approximation as it follows:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}v_{n+1} = v_{n} + f(t_{n}, v_{n}) Δt\\
+x_{n+1} = x_{n} + g(t_{n} , v_{n+1}) Δt
+\end{aligned}\end{align} \]</div>
+<p><strong>The difference with the normal Euler method is that for the equation of <span class="math notranslate nohighlight">\(x_{n+1}\)</span> it uses the velocity in time <span class="math notranslate nohighlight">\(v_{n+1}\)</span> instead of using the velocity in the time <span class="math notranslate nohighlight">\(v_{n}\)</span>.</strong></p>
+<p>Having this, we can bring these equations to our model, which would leave us:</p>
+<p><strong>For <span class="math notranslate nohighlight">\(x\)</span>:</strong> The equations <span class="math notranslate nohighlight">\((1)\)</span> and <span class="math notranslate nohighlight">\((3)\)</span>, which describe the derivative of velocity, that is, acceleration, and position at the <span class="math notranslate nohighlight">\(x\)</span> axis respectively, would then be given by:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}v_{x_{i}+1} = v_{x_{i}} - \gamma V_{x_{i}} Δt\\x_{i+1} = x_{i}+Δt v_{x_{i+1}} e^{-\gamma t}
+\end{aligned}\end{align} \]</div>
+<p><strong>For <span class="math notranslate nohighlight">\(y\)</span>:</strong> The equations <span class="math notranslate nohighlight">\((2)\)</span> and <span class="math notranslate nohighlight">\((4)\)</span> that describe the derivative of the velocity, that is, the acceleration, and the position on the axis <span class="math notranslate nohighlight">\(y\)</span> respectively, would then be given by:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}v_{y{i+1}} = v_{y_{i}} - Δt (g+ \gamma v_{y_{i}})\\
+y_{i+1} = y_{i}+Δt [\frac {-g}{\gamma} (1-e^{-\gamma Δt}) + v_{y_{i+1}}e^{-\gamma Δt}]
+\end{aligned}\end{align} \]</div>
+<p>These are then the equations that we will program to observe the parabolic motion with drag. To compare this phenomenon with the ideal parabolic motion, we will plot the latter on the same graph as well. In this motion we would not have our drag given by <span class="math notranslate nohighlight">\(\gamma\)</span> wich is then:</p>
+<p><strong>For <span class="math notranslate nohighlight">\(x\)</span>:</strong></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}v_{x_{i}+1} = v_{x_{i}}\\
+x_{i+1} = x_{i}+Δt v_{x_{i+1}}
+\end{aligned}\end{align} \]</div>
+<p><strong>For <span class="math notranslate nohighlight">\(y\)</span>:</strong></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}v_{y{i+1}} = v_{y_{i}} - Δt g\\
+y_{i+1} = y_{i}+Δt v_{y_{i+1}}
+\end{aligned}\end{align} \]</div>
+<hr class="docutils" />
+<p>Now, in the equations we see a constant <span class="math notranslate nohighlight">\(\gamma\)</span> appearing all the time. This Gamma is the drag of the movement. It is given by the coefficient of drag from Stokes’ law:</p>
+<div class="math notranslate nohighlight">
+\[f_{r} = bV_{y}
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(b\)</span> is a drag constant that depends on the fluid. This is known as the <strong>dynamic viscosity</strong> and is given by:</p>
+<div class="math notranslate nohighlight">
+\[6\pi R \mu V_{y}
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\mu\)</span> depends on the fluid. In this case we will use oil and glycerin as fluids in order to have a not so low coefficient of drag so that movements can be well differentiated.</p>
+<p><strong>AS A RECOMMENDATION!</strong> Do not use a coefficient <span class="math notranslate nohighlight">\(&gt;1\)</span> since the space of time in which it is being graphed is not very large, so the behavior could not be observed well. If you set a very high number, you can easily modify the <code class="docutils literal notranslate"><span class="pre">maximum</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">np.linspace(start,</span> <span class="pre">maximum,</span> <span class="pre">steps)</span></code> so that it plots over a larger range.</p>
+<p>Let’s look at some viscosity constants that can be used:</p>
+<p><img alt="" src="_images/constantes2.jpg" /></p>
+<p>Now that we have our constnats, we can start programming!:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Euler-Cromer</span>
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Declare initial values Motion with Drag</span>
+<span class="n">pos_x</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="n">pos_y</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="n">vel_x</span> <span class="o">=</span> <span class="mf">0.5</span> 
+<span class="n">vel_y</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Declare initial values Motion with No Drag</span>
+<span class="n">pos_x2</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="n">pos_y2</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="n">vel_x2</span> <span class="o">=</span> <span class="mf">0.5</span> 
+<span class="n">vel_y2</span> <span class="o">=</span> <span class="mi">1</span> 
+
+</pre></div>
+</div>
+<p>Now, as we had been solving the codes, let´s make a function that do the Euler-Cromer method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">EulerCromer</span><span class="p">():</span>
+  <span class="n">viscosidad_dinamica</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter dynamic viscosity of the fluid</span><span class="se">\n</span><span class="s2"> As a recomendation, make it &lt;1: &quot;</span><span class="p">))</span>
+  <span class="n">time</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+
+  <span class="n">posx</span> <span class="o">=</span> <span class="p">[</span><span class="n">pos_x</span><span class="p">];</span> <span class="n">posy</span> <span class="o">=</span> <span class="p">[</span><span class="n">pos_y</span><span class="p">]</span>
+  <span class="n">velx</span> <span class="o">=</span> <span class="p">[</span><span class="n">vel_x</span><span class="p">];</span> <span class="n">vely</span> <span class="o">=</span> <span class="p">[</span><span class="n">vel_y</span><span class="p">]</span>
+
+  <span class="n">posx2</span> <span class="o">=</span> <span class="p">[</span><span class="n">pos_x2</span><span class="p">];</span> <span class="n">posy2</span> <span class="o">=</span> <span class="p">[</span><span class="n">pos_y2</span><span class="p">]</span>
+  <span class="n">velx2</span> <span class="o">=</span> <span class="p">[</span><span class="n">vel_x2</span><span class="p">];</span> <span class="n">vely2</span> <span class="o">=</span> <span class="p">[</span><span class="n">vel_y2</span><span class="p">]</span>
+
+  <span class="n">miu</span> <span class="o">=</span> <span class="n">viscosidad_dinamica</span><span class="p">;</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="n">g</span> <span class="o">=</span> <span class="mf">9.8</span><span class="p">;</span> <span class="n">R</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+  <span class="n">b</span> <span class="o">=</span> <span class="mi">6</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">miu</span>
+  <span class="n">gamma</span> <span class="o">=</span> <span class="n">b</span><span class="o">/</span><span class="n">m</span>
+
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">velx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">velx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">velx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">vely</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vely</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">g</span><span class="o">+</span><span class="n">gamma</span><span class="o">*</span><span class="n">vely</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+    <span class="n">velx2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">velx2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">vely2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vely2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">g</span><span class="p">)</span>
+
+    <span class="n">posx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">posx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span><span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">velx</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span><span class="o">*</span><span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">)</span>
+    <span class="n">posy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">posy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span><span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">((</span><span class="o">-</span><span class="n">g</span><span class="o">/</span><span class="n">gamma</span><span class="p">)</span><span class="o">*</span><span class="p">(</span> <span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span><span class="o">*</span><span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">)</span> <span class="o">+</span> <span class="n">vely</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span><span class="o">*</span><span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">))</span>
+
+    <span class="n">posx2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">posx2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">velx2</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">posy2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">posy2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">vely2</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">posx</span><span class="p">,</span> <span class="n">posy</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">posx2</span><span class="p">,</span> <span class="n">posy2</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Parabolic Motion&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;PosX&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;PosY&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Drag&quot;</span><span class="p">,</span> <span class="s2">&quot;No Drag&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>Let´s try the code with different <span class="math notranslate nohighlight">\(\mu\)</span> values!</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Glycerin viscosity = 0.27</span>
+<span class="n">EulerCromer</span><span class="p">()</span>
+
+</pre></div>
+</div>
+<p><img alt="" src="_images/glicerina.jpg" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Engine Oil viscosity = 0.86</span>
+<span class="n">EulerCromer</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/engineoil.jpg" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Mercury viscosity = 0.0015</span>
+<span class="n">EulerCromer</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/mercurio.jpg" /></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="feature-b.html" class="btn btn-neutral float-left" title="Free Fall with Friction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="feature-d.html" class="btn btn-neutral float-right" title="Pendulum With Drag" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Elizabeth Granda.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

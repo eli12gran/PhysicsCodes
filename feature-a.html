@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radioactive Decay &mdash; PhysicsCodes 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Free Fall with Friction" href="feature-b.html" />
+    <link rel="prev" title="Summary (Codes and documentation)" href="exercises.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PhysicsCodes
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="purpose.html">Purpose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credit.html">Credit and inspiration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Summary (Codes and documentation)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Radioactive Decay</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#exact-solution"><strong>Exact solution</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature-b.html"><strong>Free Fall with Friction</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature-c.html"><strong>Parabolic Motion with Drag</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature-d.html"><strong>Pendulum With Drag</strong></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PhysicsCodes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><strong>Radioactive Decay</strong></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/feature-a.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="radioactive-decay">
+<h1><strong>Radioactive Decay</strong><a class="headerlink" href="#radioactive-decay" title="Link to this heading"></a></h1>
+<p>Radioactive decay is given by the following function:</p>
+<div class="math notranslate nohighlight">
+\[\frac {dN_{u}}{dt} = -\frac {N_{u}}{τ}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(τ\)</span> is the time constant for the decay. To carry out the exact/analytical solution, what we will do is apply the method of <strong>separable variables</strong>, that is:</p>
+<div class="math notranslate nohighlight">
+\[\int \frac {dN_{u}}{N} = \int -\frac {dt}{τ}\]</div>
+<div class="math notranslate nohighlight">
+\[ln(N_{u}) = - \frac {1}{τ}t +C\]</div>
+<div class="math notranslate nohighlight">
+\[N(t) = e^{\frac {-t}{τ}+C} = e^{c} e^{\frac {-t}{τ}}\]</div>
+<p>Which is the same as:</p>
+<div class="math notranslate nohighlight">
+\[N(t) = Ae^{\frac {-t}{τ}}\]</div>
+<p>When <span class="math notranslate nohighlight">\(t=0:\)</span></p>
+<div class="math notranslate nohighlight">
+\[N(0) = N_{0} = A\]</div>
+<p>So, we have at the end:</p>
+<hr class="docutils" />
+<div class="math notranslate nohighlight">
+\[N(t) = N_{0}e^{\frac {-t}{τ}}\]</div>
+<hr class="docutils" />
+<p>Now, since we want to solve this numerically, we’ll use Euler’s method. This is because we have a first-order ordinary equation, so a more precise method is not necessary. Applying Euler, we are left with the equation that would govern the values of the nuclei in each step of time, would be:</p>
+<div class="math notranslate nohighlight">
+\[N(t + Δt) \approx N_{u}(t) - \frac {N_{u}(t)}{τ} Δt\]</div>
+<p>In this first code, we will program both solutions: the exact one and the numerical one in order to compare them.</p>
+<hr class="docutils" />
+<section id="exact-solution">
+<h2><strong>Exact solution</strong><a class="headerlink" href="#exact-solution" title="Link to this heading"></a></h2>
+<p>Let´s remember that the equation that governs the analytical/exact solution of radioactive behavior is:</p>
+<p>$$N(t)= A e^{-t/τ}$$</p>
+<p>Where $τ$ represents the characteristic decay time. In order for us to see the exact solution in several times, we will use the same arrangement for the time that we will use for the numerical solution: we will plot the exact and numerical solutions on the same graph in order to better see the difference between them. The code is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Import Libraries-----</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">radioactiveDecay</span><span class="p">():</span>
+  <span class="c1">#Intial Values--------</span>
+    <span class="n">N_ini</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the initial number of Nuclei: &quot;</span><span class="p">))</span>
+    <span class="n">tm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the decay constant (half-life) of your element: &quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;¡¡¡RECOMENDATION!!!&quot;</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the number that corresponds to the first instants of the decay of your element.</span><span class="se">\n</span><span class="s2">A number of the type 1e-x in case the value of the constant is given by notation 10^{-x} so that the value of the x-1 corresponds to</span><span class="se">\n</span><span class="s2">the order of your constant.In case its value is integer, enter the value of the constant -1: &quot;</span><span class="p">))</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="p">[</span><span class="n">N_ini</span><span class="p">]</span>
+   <span class="c1">#Not exact solution</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+      <span class="n">N</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">tm</span><span class="p">))</span> <span class="p">)</span>
+
+   <span class="c1">#Exact Solution----------------------</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">N_ini</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">/</span><span class="n">tm</span><span class="p">)</span>
+
+    <span class="c1">#Graph---------</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Nuclei&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Euler Method&quot;</span><span class="p">,</span> <span class="s2">&quot;Exact Solution&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Radioactive Decay&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Nuclei&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now, let’s clarify a bit about the time scales that the code will use. As we know, the information about the decay constants is found in terms of half-life. This is the data that the user will enter: <strong>the half-life</strong> of the material</p>
+<p>When we run our routine, the program will ask for three values:</p>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">N_ini</span></code></strong> : Initial value of the nuclei that are</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">tm</span></code></strong> : Value of the half-life of the element (constant), any that is in the table of constants that will be shown later can be used</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">b</span></code></strong> : Value that will represent the first moments of time in which the material decays. This number, as a recommendation, should be greater than the constant by at least one unit. If it is in the form of <span class="math notranslate nohighlight">\(\times 10^{-x}\)</span>, then it must be <span class="math notranslate nohighlight">\(1e^{-x+1}\)</span>. For example:</p>
+<p><strong>Ra(226)</strong> has a half-life of: <span class="math notranslate nohighlight">\(1622\)</span>. So the value that we will enter will be <span class="math notranslate nohighlight">\(\geq 1623\)</span>.</p>
+<p><strong>Ur(14)</strong> has a half-life of: <span class="math notranslate nohighlight">\(4.5 \times 10^{9}\)</span>. So the value we will enter will be <span class="math notranslate nohighlight">\(\geq 4.5 \times 10^{10}\)</span></p>
+</li>
+</ul>
+<p>This is because that is the information of the constant: how long does the element take for its nuclei to decay by half.</p>
+<p>Now let’s test our code with 3 different elements. For this we will leave a table of constants where any that is part of the <strong>Half-Life</strong> column can be used:</p>
+<p><img alt="Constants that can be used" src="_images/constantes.jpg" /></p>
+<p>Let´s try our code!!!</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Radio (Ra) 226</span>
+<span class="n">radioactiveDecay</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/radiodecay.jpg" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Bismuto (Bi) 214</span>
+<span class="n">radioactiveDecay</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/bismutedecay.jpg" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Plutonio (Pu) 239</span>
+<span class="n">radioactiveDecay</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/plutoniodecay.jpg" /></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="exercises.html" class="btn btn-neutral float-left" title="Summary (Codes and documentation)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="feature-b.html" class="btn btn-neutral float-right" title="Free Fall with Friction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Elizabeth Granda.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
