@@ -88,6 +88,7 @@ plt.title("Pendulum With No Drag Euler Method")
 plt.xlabel("time")
 plt.ylabel("theta")
 ```
+![](pendulo1.jpg)
 
 ### **Simple Pendulum with Euler-Cromer**
 
@@ -113,6 +114,8 @@ plt.title("Pendulum With No Drag Euler-Cromer")
 plt.xlabel("time")
 plt.ylabel("theta")
 ```
+![](pendulo2.jpg)
+
 
 ### **Pendulum with friction**
 
@@ -165,6 +168,9 @@ Calling our finction and giving it some angles converted into radians:
 fig = plt.figure(figsize=(9,6))
 frictionPendulum(10, [90*np.pi/180, 45*np.pi/180, 50*np.pi/180, 80*np.pi/180], 0.097)
 ```
+
+![](pendulo3.jpg)
+
 ---
 Now, with the purpose  of comparing the exact and analytical solutions, we solved the differential equation for **small angles** analitically which gave as a result:
 
@@ -193,3 +199,4 @@ plt.grid("--"); plt.ylabel("theta"); plt.xlabel("time")
 
 ```
 
+![](pendulo4.jpg)
