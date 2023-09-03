@@ -114,7 +114,82 @@ plt.xlabel("time")
 plt.ylabel("theta")
 ```
 
+### **Pendulum with friction**
 
+For this case we would have:
 
+```{math}
+\frac {d^2\theta}{dt^2} = -\frac {g}{l} sin(\theta)- \frac {b}{m} \frac {d\theta}{dt} 
+```
 
+Where {math}`\frac {b}{m}` is the coefficient {math}`\gamma` used in the previous codes. Since this equation is non-linear, what we will do is "take advantage" of the definition of angular frequency {math}`\omega` which is defined as the change of the angle with respect to time. So having it this way we can say that {math}`\omega = \frac {d\theta}{dt}`. So our equation would be in terms of {math}`\omega` and would look like this:
+
+```{math}
+\omega´ = -\frac {g}{l} sin(\theta)- \frac {b}{m} \omega
+```
+
+Now yes, we can use Euler-Cromer again to solve it, and the numerical equations are as follows:
+
+```{math}
+\omega_{i+1} = \omega_{i} + Δt(\frac {-g}{l} sin(\theta_{i}) - \gamma \omega_{i})
+
+\theta_{i+1} = \omega_{i+1} + Δt(\theta_{i})
+```
+
+----
+
+Since the idea is to observe several angles in a graph, we will create a function for this. It will receive as parameters a maximum time, a list of angles and the coefficient of viscosity, the latter is which is in the hands of the user to change. The dynamic viscosity of the air is quite low ({math}`0.018`), so it is recommended to set a slightly larger number to see how the movement stops.
+
+The code is as follows:
+
+```
+def frictionPendulum(tiempo, angulos, dynamic_viscosity, dt=0.01, g=9.8, l=0.5):
+  miu = dynamic_viscosity; m = 10; g = 9.8; R=5; #Constantes
+  b = 6*np.pi*R*miu
+  gamma = b/m
+  t = np.arange(0, tiempo+dt, dt)
+  w2=[0]
+  for theta_ in angulos:
+    theta = [theta_, theta_]
+    for i in range(1, int(tiempo/dt)):
+        w2.append(w2[i-1] + t[1] * (-g/l * np.sin(theta[i-1]) - gamma * w2[i-1]))
+        theta.append(theta[i-1] + t[1]*w2[i])
+    plt.plot(t, theta, label=f"angulo={theta_}")
+  plt.legend(loc="best"); plt.grid("--"); plt.ylabel("theta"); plt.xlabel("time"); plt.title("Pendulum with Drag Euler Cromer"); plt.show()
+  pass
+```
+
+Calling our finction and giving it some angles converted into radians:
+
+```
+fig = plt.figure(figsize=(9,6))
+frictionPendulum(10, [90*np.pi/180, 45*np.pi/180, 50*np.pi/180, 80*np.pi/180], 0.097)
+```
+---
+Now, with the purpose  of comparing the exact and analytical solutions, we solved the differential equation for **small angles** analitically which gave as a result:
+
+```{math}
+\theta(t)= \theta_{0} e^{-\gamma t/2} sin(\omega t + \phi)
+```
+
+It is important to let clear that this is a possible solution when:
+
+```{math}
+\omega = \sqrt{\frac {\gamma^2}{4} - \frac {g}{l}}
+```
+
+For large angles, the equation cannot be solved analytically since it is no longer linear ({math}`sin(\theta)` appears) in the second derivative of {math}`\theta`. So, the solution of this analytic remains:
+
+```
+gamma = 1; phi = 0; theta = [0]; amp=1; phi=0; g =9.8; l=1
+time = np.arange(0, 10, 0.01)
+w = np.sqrt( abs((gamma**2 / 4) - (g/l)))
+for i in range(len(time)-1):
+  theta.append(amp * np.exp(-gamma*time[i]/2) * np.sin(w*time[i] + phi))
+
+plt.plot(time, theta)
+plt.title("Exact Solution for Small Theta Values With Drag")
+plt.grid("--"); plt.ylabel("theta"); plt.xlabel("time")
+
+```
 
